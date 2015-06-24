@@ -5,14 +5,20 @@
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 		<title>OZWSS-Polymer-google-signin-status Demo</title>
 		<script src="../../webcomponentsjs/webcomponents-lite.min.js"></script>
+		<link rel="import" href="../../google-signin/google-signin.html">
 		<link rel="import" href="../OZWSS-Polymer-google-signin-status.html">
 	</head>
 	<body>
 		<OZWSS-Polymer-google-signin-status id="google-signin-status"></OZWSS-Polymer-google-signin-status>
 		<google-signin id="google-signin" scopes="profile" raised="true"></google-signin>
 		<script>
-			var google_signin =  document.getElementById('google-signin');
-			google_signin.clientId = "your clientId here";
+			// See https://github.com/Polymer/polymer/issues/1381
+			window.addEventListener('WebComponentsReady', function() {
+				document.querySelector('body').removeAttribute('unresolved');
+				var google_signin =  document.getElementById('google-signin');
+				google_signin.clientId = "your clientId here";
+			});
+			
 		</script>
 	</body>
 </html>

@@ -62,6 +62,9 @@
 	Polymer({
 		is: "OZWSS-Polymer-google-signin-status",
 		properties: {
+			/**
+			* The JSON object for a google user profile
+			*/
 			profile: {
 				type: Object,
 				value: function() { return {}; }
@@ -71,11 +74,23 @@
 				value: false
 			},
 		},
+		/**
+		 * The `send-command` event is fired whenever _signIn is called.
+		 *
+		 * @event send-command
+		 * @detail {{command: String}}
+		 */
+		/**
+		* _signIn tries to parse the authentication response and fire an event to send the authentication token to the backend
+		*/
 		_signIn: function (response) {
 			var commandstring = "AUTH~"+response.detail.access_token;
 			this.fire('send-command',{command:commandstring});
 			this._signedIn = true;
 		},
+		/**
+		* _signOut resets the element to the original state
+		*/
 		_signOut: function () {
 			this.profile = {};
 			this._signedIn = false;
