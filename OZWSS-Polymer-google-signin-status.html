@@ -52,9 +52,9 @@
 			},
 		},
 		_signIn: function (response) {
-			this._signedIn = true;
-			var commandstring = "AUTH~"+response.detail.user.getAuthResponse().access_token;
+			var commandstring = "AUTH~"+response.detail.access_token;
 			this.fire('send-command',{command:commandstring});
+			this._signedIn = true;
 		},
 		_signOut: function () {
 			this.profile = {};
