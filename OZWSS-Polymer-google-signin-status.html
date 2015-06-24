@@ -27,11 +27,11 @@
 		</google-signin-aware>
 		
 		<div>
-			<template if="{{_signedIn}}">
+			<template is="dom-if" if="{{_signedIn}}">
 				<p class="center">{{profile.displayName}}</p>
 				<a href="{{profile.url}}"><img src="{{profile.image.url}}"/></a>
 			</template>
-			<template if="{{!_signedIn}}">
+			<template is="dom-if" if="{{!_signedIn}}">
 				<p class="center">Not signed in!</p>
 			</template>
 		</div>
