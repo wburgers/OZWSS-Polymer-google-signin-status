@@ -1,0 +1,24 @@
+{
+  "name": "OZWSS-Polymer-google-signin-status",
+  "version": "0.0.1",
+  "homepage": "https://github.com/wburgers/OZWSS-Polymer-google-signin-status",
+  "description": "google-signin-status element for the OZWSS Polymer client",
+  "main": "OZWSS-Polymer-google-signin-status.html",
+  "authors": [
+    "Willem Burgers"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#~1.0.0",
+    "google-signin": "GoogleWebComponents/google-signin#^1.0.0",
+    "google-apis": "GoogleWebComponents/google-apis#^1.0.0"
+  },
+  "devDependencies": {
+    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0"
+  }
+}

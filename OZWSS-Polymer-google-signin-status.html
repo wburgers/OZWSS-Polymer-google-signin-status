@@ -1,0 +1,64 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="../google-signin/google-signin-aware.html">
+<link rel="import" href="../google-apis/google-client-loader.html">
+
+<!--
+@element ozwss-signinstatus
+@demo demo/index.html
+-->
+
+<dom-module id="OZWSS-Polymer-google-signin-status">
+	<style>
+		:host {
+			display: inline-block;
+			margin-top: 5px;
+			width: 100%;
+		}
+	</style>
+	<template>
+		<google-client-loader id="plus" name="plus" version="v1">
+		</google-client-loader>
+		
+		<google-signin-aware
+			scopes="profile"
+			on-google-signin-aware-success="_signIn"
+			on-google-signin-aware-failure="_signOut"
+			on-google-signin-aware-signed-out="_signOut">
+		</google-signin-aware>
+		
+		<div>
+			<template if="{{_signedIn}}">
+				<p class="center">{{profile.displayName}}</p>
+				<a href="{{profile.url}}"><img src="{{profile.image.url}}"/></a>
+			</template>
+			<template if="{{!_signedIn}}">
+				<p class="center">Not signed in!</p>
+			</template>
+		</div>
+	</template>
+</dom-module>
+
+<script>
+	Polymer({
+		is: "OZWSS-Polymer-google-signin-status",
+		properties: {
+			profile: {
+				type: Object,
+				value: function() { return {}; }
+			},
+			_signedIn: {
+				type: Boolean,
+				value: false
+			},
+		},
+		_signIn: function (response) {
+			this._signedIn = true;
+			var commandstring = "AUTH~"+response.detail.user.getAuthResponse().access_token;
+			this.fire('send-command',{command:commandstring});
+		},
+		_signOut: function () {
+			this.profile = {};
+			this._signedIn = false;
+		},
+	});
+</script>
