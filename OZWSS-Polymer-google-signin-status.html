@@ -48,11 +48,11 @@
 		</google-signin-aware>
 		
 		<div>
-			<template is="dom-if" if="{{_signedIn}}">
+			<template is="dom-if" if="{{signedIn}}">
 				<p class="center">{{profile.displayName}}</p>
 				<a href="{{profile.url}}"><img src="{{profile.image.url}}"/></a>
 			</template>
-			<template is="dom-if" if="{{!_signedIn}}">
+			<template is="dom-if" if="{{!signedIn}}">
 				<p class="center">Not signed in!</p>
 			</template>
 		</div>
@@ -70,7 +70,7 @@
 				type: Object,
 				value: function() { return {}; }
 			},
-			_signedIn: {
+			signedIn: {
 				type: Boolean,
 				value: false
 			},
@@ -87,14 +87,13 @@
 		_signIn: function (response) {
 			var commandstring = "AUTH~"+response.detail.access_token;
 			this.fire('send-command',{command:commandstring});
-			this._signedIn = true;
 		},
 		/**
 		* _signOut resets the element to the original state
 		*/
 		_signOut: function () {
+			this.signedIn = false;
 			this.profile = {};
-			this._signedIn = false;
 		},
 	});
 </script>
